@@ -32,6 +32,37 @@ Feature of SCM Web Application:-
 6)User can see contacts details
 
 
+![image](https://github.com/user-attachments/assets/a8842688-79d0-46bd-bf02-289da13c7737)
+
+7)User can search, update and delete contacts
+
+8)User can Exports contacts
+
+
+Technology and Tools Used:-
+
+1)Latest Version of Java
+
+2)Spring Boot for Backend Api Development
+
+3)Thymleaf
+
+4)MYSQL
+
+6)JavaScript
+
+7)Tailwind CSS
+
+8)Flowbite
+
+9)Cloudinary for upload image on cloud
+
+
+Tools and IDE:
+
+Visual Studio code for Backend and frontend
+
+
 
 
 
