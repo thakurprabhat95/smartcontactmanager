@@ -20,11 +20,11 @@ public class AuthController {
     // verify email
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepo userRe po;
 
     @GetMapping("/verify-email")
     public String verifyEmail(
-            @RequestParam("token") String token, HttpSession session) {
+            @RequestParam String token, HttpSession session) {
 
         User user = userRepo.findByEmailToken(token).orElse(null);
 

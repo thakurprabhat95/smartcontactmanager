@@ -12,7 +12,9 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import java.util.List;
+
+import java.util.Arrays;
+
 import com.scm.entities.Providers;
 import com.scm.entities.User;
 import com.scm.helpers.AppConstants;
@@ -40,13 +42,13 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
 
         // identify the provider
 
-        var oauth2AuthenicationToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2AuthenticationToken oauth2AuthenicationToken = (OAuth2AuthenticationToken) authentication;
 
         String authorizedClientRegistrationId = oauth2AuthenicationToken.getAuthorizedClientRegistrationId();
 
         logger.info(authorizedClientRegistrationId);
 
-        var oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
+        DefaultOAuth2User oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
 
         oauthUser.getAttributes().forEach((key, value) -> {
             logger.info(key + " : " + value);
@@ -54,7 +56,7 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
 
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
-        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        user.setRoleList(Arrays.asList(AppConstants.ROLE_USER));
         user.setEmailVerified(true);
         user.setEnabled(true);
         user.setPassword("dummy");

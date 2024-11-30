@@ -33,7 +33,7 @@ public class ContactServiceImpl implements ContactService
     @Override
     public Contact update(Contact contact) {
 
-        var contactOld = contactRepo.findById(contact.getId())
+        Contact contactOld = contactRepo.findById(contact.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found"));
         contactOld.setName(contact.getName());
         contactOld.setEmail(contact.getEmail());
@@ -62,7 +62,7 @@ public class ContactServiceImpl implements ContactService
 
     @Override
     public void delete(String id) {
-        var contact = contactRepo.findById(id)
+        Contact contact = contactRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found with given id " + id));
         contactRepo.delete(contact);
 
@@ -79,7 +79,7 @@ public class ContactServiceImpl implements ContactService
 
         Sort sort = direction.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
 
-        var pageable = PageRequest.of(page, size, sort);
+        PageRequest pageable = PageRequest.of(page, size, sort);
 
         return contactRepo.findByUser(user, pageable);
 
@@ -89,7 +89,7 @@ public class ContactServiceImpl implements ContactService
     public Page<Contact> searchByName(String nameKeyword, int size, int page, String sortBy, String order, User user) {
 
         Sort sort = order.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
-        var pageable = PageRequest.of(page, size, sort);
+        PageRequest pageable = PageRequest.of(page, size, sort);
         return contactRepo.findByUserAndNameContaining(user, nameKeyword, pageable);
     }
 
@@ -97,7 +97,7 @@ public class ContactServiceImpl implements ContactService
     public Page<Contact> searchByEmail(String emailKeyword, int size, int page, String sortBy, String order,
             User user) {
         Sort sort = order.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
-        var pageable = PageRequest.of(page, size, sort);
+        PageRequest pageable = PageRequest.of(page, size, sort);
         return contactRepo.findByUserAndEmailContaining(user, emailKeyword, pageable);
     }
 
@@ -106,7 +106,7 @@ public class ContactServiceImpl implements ContactService
             String order, User user) {
 
         Sort sort = order.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
-        var pageable = PageRequest.of(page, size, sort);
+        PageRequest pageable = PageRequest.of(page, size, sort);
         return contactRepo.findByUserAndPhoneNumberContaining(user, phoneNumberKeyword, pageable);
     }
 

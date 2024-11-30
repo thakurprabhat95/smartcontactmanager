@@ -1,7 +1,7 @@
 package com.scm.helpers;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -16,12 +16,10 @@ public class Helper {
     public static String getEmailOfLoggedInUser(Authentication authentication) {
 
         // agar email is password se login kiya hai to : email kaise nikalenge
-        if (authentication instanceof OAuth2AuthenticationToken) {
+        if (authentication instanceof OAuth2AuthenticationToken aOAuth2AuthenticationToken) {
+            String clientId = aOAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
 
-            var aOAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
-            var clientId = aOAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
-
-            var oauth2User = (OAuth2User) authentication.getPrincipal();
+            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
             String username = "";
 
             if (clientId.equalsIgnoreCase("google")) {
